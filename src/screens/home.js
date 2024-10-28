@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {Button, Modal, PaperProvider, Portal, Card} from 'react-native-paper';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {hairColorInfo} from '../../utils/hairColorInfo';
@@ -62,20 +62,23 @@ const Home = () => {
               borderRadius: 15,
               justifyContent: 'flex-start',
               backgroundColor: 'white',
-              padding: '2%',
+              padding: '1%',
             }}
             visible={openModal}>
             <View style={styles.hairColorContainer}>
               {Array.isArray(hairColorInfo)
                 ? hairColorInfo.map((item,index) => {
                     return (
-                      <View key={index} style={{backgroundColor:'skyblue',width:'20%',margin:'3%',justifyContent:'center',alignItems:'center',flex:1}}>
-                 
+                      <Pressable key={index} style={{width:'27%',margin:'1%',justifyContent:'center',alignItems:'center',}} onPress={()=>console.log("WEEEEEE",imageUri)}>
+                        <View style={{backgroundColor:item.colorHex,height:'35%',width:'35%',borderRadius:5}}/>
+                 <View>
                         <Text>{item.name}</Text>
-                      </View>
+                        </View>
+                      </Pressable>
                     );
                   })
                 : ''}
+                <Button onPress={()=>setOpenModal(false)}>cancel</Button>
             </View>
           </Modal>
         </Portal>
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-    backgroundColor: '#d9d9d9',
+    // backgroundColor: '#d9d9d9',
     flex: 1,
     padding: '5%',
     width: '70%',
@@ -125,7 +128,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
+    justifyContent:'center'
   },
 });
 
